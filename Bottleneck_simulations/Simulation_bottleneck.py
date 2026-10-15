@@ -109,9 +109,9 @@ T_Steppe_into_SAS = 3_500 / gen_time
 demography_simple = msprime.Demography() #initializing an msprime "demography" object
 # This is the "trunk" population that we merge other populations into
 demography_simple.add_population(
-    name="SAHG",
-    description="Ancestral South Asians",
-    initial_size=N_SAHG,
+    name="AncWestEurasian",
+    description="Ancestral population of West Eurasians",
+    initial_size=N_ancWE,
     initially_active=True,
 );
 
@@ -174,7 +174,7 @@ sequence_length=length_chr14
 elapsed = time.time()
 ts = msprime.sim_ancestry(
     ploidy=1, ## test to change
-    samples=sample_list_simple, scrip_for_python.sh
+    samples=sample_list_simple,
     demography=demography_simple,
     record_migrations=True,
     record_provenance=False,
@@ -239,10 +239,6 @@ ts = msprime.sim_ancestry(
 
 print(time.time() - elapsed)
 
-
-# In[430]:
-
-
 ##Frequency of outgroup tracts
 ##Get segments and nb of individuals carring them
 elapsed = time.time()
@@ -264,7 +260,6 @@ length_tracts=np.append(length_tracts,no_outgroup)
 freqs=np.append(freqs,0)
 
 print(len(length_tracts),len(freqs))
-
 
 
 ###Generate table for histogram of the percentage of genome having %of outgroup frequency 
@@ -387,16 +382,16 @@ bin_width=0.01
 
 for size_bt in size_bt_vec:
     print("size_bt=",size_bt)
-    for start_bt in end_bt_vec:
+    for end_bt in end_bt_vec:
         print("start_bt=",start_bt, "end_bt=", end_bt)
         
         ##scenario
         demography_bt = msprime.Demography() #initializing an msprime "demography" object
         # This is the "trunk" population that we merge other populations into
         demography_bt.add_population(
-            name="SAHG",
-            description="Ancestral South Asians",
-            initial_size=N_SAHG,
+            name="AncWestEurasian",
+            description="Ancestral population of West Eurasians",
+            initial_size=N_ancWE,
             initially_active=True,
         );
         
@@ -415,10 +410,10 @@ for size_bt in size_bt_vec:
         
         # Split Steppe and South Asians
         demography_bt.add_population_split(
-            time=T_europa_asia, derived=["SouthAsia"], ancestral="SAHG"
+            time=T_europa_asia, derived=["SouthAsia"], ancestral=""AncWestEurasian"
         )
         demography_bt.add_population_split(
-            time=T_europa_asia, derived=["Steppe"], ancestral="SAHG"
+            time=T_europa_asia, derived=["Steppe"], ancestral=""AncWestEurasian"
         )
         # Add Steppe geneflow for one generation (pulse model)
         demography_bt.add_migration_rate_change(time = T_Steppe_into_SAS, rate = admixtureproportion, dest = "Steppe", source = "SouthAsia")
