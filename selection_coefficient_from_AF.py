@@ -22,7 +22,7 @@ dt = 125          # number of generations between samples
 
 
 
-s_dominant = solve_s_dominant(p0, p_obs, dt, s_min=-1, s_max=1)
-s_additive = solve_s_additive(p0, p_obs, dt, s_min=-1, s_max=1)
+s_dominant = solve_s_dominant(p0, p_obs, dt)
+s_additive = solve_s_additive(p0, p_obs, dt)
 print("Estimated s_dominant =", s_dominant)
 print("Estimated s_additive =", s_additive)
