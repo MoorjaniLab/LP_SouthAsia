@@ -130,11 +130,11 @@ demography_simple.add_population(
 
 # Split Steppe and South Asians
 demography_simple.add_population_split(
-    time=T_europa_asia, derived=["SouthAsia"], ancestral="SAHG"
+    time=T_europa_asia, derived=["SouthAsia"], ancestral="AncWestEurasian"
 )
 
 demography_simple.add_population_split(
-    time=T_europa_asia, derived=["Steppe"], ancestral="SAHG"
+    time=T_europa_asia, derived=["Steppe"], ancestral="AncWestEurasian"
 )
 
 # Add Steppe geneflow for one generation (pulse model)
@@ -410,10 +410,10 @@ for size_bt in size_bt_vec:
         
         # Split Steppe and South Asians
         demography_bt.add_population_split(
-            time=T_europa_asia, derived=["SouthAsia"], ancestral=""AncWestEurasian"
+            time=T_europa_asia, derived=["SouthAsia"], ancestral="AncWestEurasian"
         )
         demography_bt.add_population_split(
-            time=T_europa_asia, derived=["Steppe"], ancestral=""AncWestEurasian"
+            time=T_europa_asia, derived=["Steppe"], ancestral="AncWestEurasian"
         )
         # Add Steppe geneflow for one generation (pulse model)
         demography_bt.add_migration_rate_change(time = T_Steppe_into_SAS, rate = admixtureproportion, dest = "Steppe", source = "SouthAsia")
@@ -421,11 +421,11 @@ for size_bt in size_bt_vec:
         
         # Add Bottleneck in Asian population
         demography_bt.add_population_parameters_change(
-            time=start_bt, population="SouthAsia", initial_size=N_SAsia
+            time=end_bt, population="SouthAsia", initial_size=size_bt
         )
         
         demography_bt.add_population_parameters_change(
-            time=end_bt, population="SouthAsia", initial_size=size_bt
+            time=start_bt, population="SouthAsia", initial_size=N_SAsia
         )
         
         demography_bt.sort_events()
